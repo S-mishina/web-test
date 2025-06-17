@@ -1,0 +1,36 @@
+_wasm::traits::*;
+use proxy_wasm::types::*;
+
+struct PathRewrite;
+
+impl Context for PathRewrite {}
+
+impl HttpContext for PathRewrite {
+    fn on_http_request_headers(&mut self, _: usize) -> Action {
+        if let Some(path) = self.get_http_request_header(":path") {
+            if path.starts_with("/v/") {
+                let mut new_path = path.replacen("/v/", "/v1/test/", 1);
+                if new_path.ends_with(".json") {
+                    new_path = new_path.strip_suffix(".test").unwrap().to_string();
+                }
+                self.set_http_request_header(":path", Some(&new_path));
+            }
+        }
+
+        Action::Continue
+    }
+}
+
+impl RootContext for PathRewrite {
+    fn on_configure(&mut self, _config_size: usize) -> bool {
+        true
+    }
+
+    fn create_http_context(&self, _context_id: u32) -> Box<dyn HttpContext> {
+        Box::new(PathRewrite)
+    }
+
+    fn get_type(&self) -> Option<ContextType> {
+        Some(ContextType::HttpContext)
+    }
+}
