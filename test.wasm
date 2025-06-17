@@ -10,7 +10,7 @@ impl HttpContext for PathRewrite {
         if let Some(path) = self.get_http_request_header(":path") {
             if path.starts_with("/v/") {
                 let mut new_path = path.replacen("/v/", "/v1/test/", 1);
-                if new_path.ends_with(".json") {
+                if new_path.ends_with(".test") {
                     new_path = new_path.strip_suffix(".test").unwrap().to_string();
                 }
                 self.set_http_request_header(":path", Some(&new_path));
