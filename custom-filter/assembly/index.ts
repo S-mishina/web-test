@@ -1,36 +1,36 @@
-// proxy-runtime のすべてのシンボルをエクスポート
 export * from "@solo-io/proxy-runtime/proxy";
+import { RootContext, Context, RootContextHelper, ContextHelper, registerRootContext, FilterHeadersStatusValues, stream_context } from "@solo-io/proxy-runtime";
 
-import {
-  RootContext,
-  Context,
-  registerRootContext,
-  FilterHeadersStatusValues
-} from "@solo-io/proxy-runtime";
+class AddHeaderRoot extends RootContext {
+  configuration : string;
 
-// リクエストごとのコンテキスト定義
-class MyContext extends Context {
-  // リクエストヘッダー受信時のフック
-  onRequestHeaders(): FilterHeadersStatusValues {
-    const path = this.getRequestHeader(":path");
+  onConfigure(): bool {
+    let conf_buffer = super.getConfiguration();
+    let result = String.UTF8.decode(conf_buffer);
+    this.configuration = result;
+    return true;
+  }
 
-    // 条件付きでヘッダーを付与
-    if (path == "/target-path") {
-      this.addRequestHeader("x-my-header", "true");
+  createContext(): Context {
+    return ContextHelper.wrap(new AddHeader(this));
+  }
+}
+
+class AddHeader extends Context {
+  root_context : AddHeaderRoot;
+  constructor(root_context:AddHeaderRoot){
+    super();
+    this.root_context = root_context;
+  }
+  onResponseHeaders(a: u32): FilterHeadersStatusValues {
+    const root_context = this.root_context;
+    if (root_context.configuration == "") {
+      stream_context.headers.response.add("hello", "world!");
+    } else {
+      stream_context.headers.response.add("hello", root_context.configuration);
     }
-
-    // 常に次のフィルタに進む
     return FilterHeadersStatusValues.Continue;
   }
 }
 
-// Envoyインスタンスごとの RootContext 定義
-class MyRootContext extends RootContext {
-  // AssemblyScript では必ず引数なしで Context を返す必要あり
-  createContext(): Context {
-    return new MyContext(); // 引数なし！
-  }
-}
-
-// root_id を "my_root_context" に設定（Istio 側と一致させること）
-registerRootContext(() => new MyRootContext(), "my_root_context");
+registerRootContext(() => { return RootContextHelper.wrap(new AddHeaderRoot()); }, "add_header");
