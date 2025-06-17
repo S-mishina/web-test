@@ -2,38 +2,29 @@ export * from "@solo-io/proxy-runtime/proxy";
 import {
   RootContext,
   Context,
-  RootContextHelper,
-  ContextHelper,
   registerRootContext,
   FilterHeadersStatusValues,
-  stream_context
 } from "@solo-io/proxy-runtime";
 
-class RewriteRoot extends RootContext {
-  createContext(): Context {
-    return ContextHelper.wrap(new RewriteContext(this));
-  }
-}
+class MyContext extends Context {
+  onRequestHeaders(): FilterHeadersStatusValues {
+    const path = this.getRequestHeader(":path");
 
-class RewriteContext extends Context {
-  root_context: RewriteRoot;
-
-  constructor(root_context: RewriteRoot) {
-    super();
-    this.root_context = root_context;
-  }
-
-  onRequestHeaders(_: u32): FilterHeadersStatusValues {
-    let path = stream_context.headers.request.get(":path");
-    if (path !== null && path.startsWith("/test/") && path.endsWith(".json")) {
-      let name = path.substring(6, path.length - 5);
-      let newPath = "/test1/" + name;
-      stream_context.headers.request.replace(":path", newPath);
+    if (path == "/target-path") {
+      this.addRequestHeader("x-my-header", "true");
     }
+
     return FilterHeadersStatusValues.Continue;
   }
 }
 
-registerRootContext(() => {
-  return RootContextHelper.wrap(new RewriteRoot());
-}, "rewrite_path");
+class MyRootContext extends RootContext {
+  createContext(): Context {
+    return new MyContext();
+  }
+}
+
+registerRootContext(
+  () => new MyRootContext(),
+  "my_root_context"
+);
