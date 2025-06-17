@@ -46,7 +46,7 @@
  (data (i32.const 1632) "*\00\00\00\01\00\00\00\01\00\00\00*\00\00\00d\00i\00d\00 \00n\00o\00t\00 \00f\00i\00n\00d\00 \00r\00o\00o\00t\00 \00i\00d\00 \00")
  (data (i32.const 1696) "\19\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\98 \01\00\00\00\00\00\10\00\00\00\n\00\00\00\10\00\00\00\n\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\98 \01\00\00\00\00\00\10\00\00\00\00\00\00\00\98 \01\00\00\00\00\00\98\00A\00\00\00\00\00\10\00\00\00\0c\00\00\00\93\00\00\00\02\00\00\00\10\00\00\00\0c\00\00\00\10\00\00\00\0d\00\00\00\10\00\00\00\0d\00\00\00")
  (table $0 50 funcref)
- (elem (i32.const 1) $~lib/@solo-io/proxy-runtime/runtime/BaseContext#constructor~anonymous|0 $~lib/@solo-io/proxy-runtime/runtime/BaseContext#constructor~anonymous|1 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|0 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|1 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|2 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|3 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|4 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|5 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|6 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|0 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|1 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|2 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|3 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|4 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|5 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|6 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|0 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|1 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|2 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|3 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|4 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|5 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|6 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|7 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|8 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|9 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|10 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|11 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|12 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|13 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|0 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|1 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|2 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|3 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|4 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|5 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|6 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|7 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|8 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|9 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|10 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|11 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|12 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|13 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|14 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|15 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|7 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|8 $start:assembly/index~anonymous|0)
+ (elem (i32.const 1) $~lib/@solo-io/proxy-runtime/runtime/BaseContext#constructor~anonymous|0 $~lib/@solo-io/proxy-runtime/runtime/BaseContext#constructor~anonymous|1 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|0 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|1 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|2 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|3 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|4 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|5 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|6 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/RewriteRoot>#constructor~anonymous|0 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/RewriteRoot>#constructor~anonymous|1 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/RewriteRoot>#constructor~anonymous|2 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/RewriteRoot>#constructor~anonymous|3 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/RewriteRoot>#constructor~anonymous|4 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/RewriteRoot>#constructor~anonymous|5 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/RewriteRoot>#constructor~anonymous|6 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|0 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|1 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|2 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|3 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|4 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|5 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|6 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|7 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|8 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|9 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|10 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|11 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|12 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|13 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|0 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|1 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|2 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|3 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|4 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|5 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|6 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|7 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|8 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|9 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|10 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|11 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|12 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|13 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|14 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|15 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/RewriteRoot>#constructor~anonymous|7 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/RewriteRoot>#constructor~anonymous|8 $start:assembly/index~anonymous|0)
  (global $~lib/rt/tlsf/ROOT (mut i32) (i32.const 0))
  (global $~lib/@solo-io/proxy-runtime/runtime/globalArrayBufferReference (mut i32) (i32.const 0))
  (global $~lib/@solo-io/proxy-runtime/runtime/globalU32Ref (mut i32) (i32.const 0))
@@ -5173,7 +5173,7 @@
   i32.store offset=4
   local.get $0
  )
- (func $assembly/index/AddHeaderRoot#constructor (; 84 ;) (param $0 i32) (result i32)
+ (func $assembly/index/RewriteRoot#constructor (; 84 ;) (param $0 i32) (result i32)
   local.get $0
   i32.eqz
   if
@@ -5188,7 +5188,7 @@
   local.set $0
   local.get $0
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|0 (; 85 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/RewriteRoot>#constructor~anonymous|0 (; 85 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5215,7 +5215,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|1 (; 86 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/RewriteRoot>#constructor~anonymous|1 (; 86 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5241,7 +5241,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|2 (; 87 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/RewriteRoot>#constructor~anonymous|2 (; 87 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5268,7 +5268,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|3 (; 88 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/RewriteRoot>#constructor~anonymous|3 (; 88 ;) (param $0 i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5292,7 +5292,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|4 (; 89 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/RewriteRoot>#constructor~anonymous|4 (; 89 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5317,7 +5317,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|5 (; 90 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/RewriteRoot>#constructor~anonymous|5 (; 90 ;) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5346,7 +5346,7 @@
  (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#done (; 91 ;) (param $0 i32)
   nop
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|6 (; 92 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/RewriteRoot>#constructor~anonymous|6 (; 92 ;) (param $0 i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5685,7 +5685,7 @@
   i32.store offset=64
   local.get $0
  )
- (func $assembly/index/RewritePath#constructor (; 122 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $assembly/index/RewriteContext#constructor (; 122 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -5727,7 +5727,7 @@
   call $~lib/rt/pure/__release
   local.get $0
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|0 (; 123 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|0 (; 123 ;) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5753,7 +5753,7 @@
   call $~lib/rt/pure/__release
   local.get $1
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|1 (; 124 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|1 (; 124 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5781,7 +5781,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|2 (; 125 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|2 (; 125 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5809,7 +5809,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|3 (; 126 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|3 (; 126 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5834,7 +5834,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|4 (; 127 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|4 (; 127 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6891,7 +6891,7 @@
   local.get $2
   call $~lib/rt/pure/__release
  )
- (func $assembly/index/RewritePath#onRequestHeaders (; 151 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $assembly/index/RewriteContext#onRequestHeaders (; 151 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -6905,47 +6905,49 @@
   local.get $2
   i32.const 0
   i32.ne
-  if
+  if (result i32)
    local.get $2
    i32.const 720
    i32.const 0
    call $~lib/string/String#startsWith
-   if (result i32)
-    local.get $2
-    i32.const 784
-    i32.const 536870904
-    call $~lib/string/String#endsWith
-   else
-    i32.const 0
-   end
-   if
-    local.get $2
-    i32.const 6
-    local.get $2
-    call $~lib/string/String#get:length
-    i32.const 5
-    i32.sub
-    call $~lib/string/String#substring
-    local.set $3
-    i32.const 832
-    local.get $3
-    call $~lib/string/String.__concat
-    local.tee $4
-    call $~lib/rt/pure/__retain
-    local.set $5
-    global.get $~lib/@solo-io/proxy-runtime/runtime/stream_context
-    i32.load
-    i32.load
-    i32.const 688
-    local.get $5
-    call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#replace
-    local.get $3
-    call $~lib/rt/pure/__release
-    local.get $4
-    call $~lib/rt/pure/__release
-    local.get $5
-    call $~lib/rt/pure/__release
-   end
+  else
+   i32.const 0
+  end
+  if (result i32)
+   local.get $2
+   i32.const 784
+   i32.const 536870904
+   call $~lib/string/String#endsWith
+  else
+   i32.const 0
+  end
+  if
+   local.get $2
+   i32.const 6
+   local.get $2
+   call $~lib/string/String#get:length
+   i32.const 5
+   i32.sub
+   call $~lib/string/String#substring
+   local.set $3
+   i32.const 832
+   local.get $3
+   call $~lib/string/String.__concat
+   local.tee $4
+   call $~lib/rt/pure/__retain
+   local.set $5
+   global.get $~lib/@solo-io/proxy-runtime/runtime/stream_context
+   i32.load
+   i32.load
+   i32.const 688
+   local.get $5
+   call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#replace
+   local.get $3
+   call $~lib/rt/pure/__release
+   local.get $4
+   call $~lib/rt/pure/__release
+   local.get $5
+   call $~lib/rt/pure/__release
   end
   global.get $~lib/@solo-io/proxy-runtime/runtime/FilterHeadersStatusValues.Continue
   local.set $5
@@ -6953,7 +6955,7 @@
   call $~lib/rt/pure/__release
   local.get $5
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|5 (; 152 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|5 (; 152 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6974,13 +6976,13 @@
   end
   i32.load offset=68
   local.get $1
-  call $assembly/index/RewritePath#onRequestHeaders
+  call $assembly/index/RewriteContext#onRequestHeaders
   local.set $2
   local.get $0
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|6 (; 153 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|6 (; 153 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -7007,7 +7009,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|7 (; 154 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|7 (; 154 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -7035,7 +7037,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|8 (; 155 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|8 (; 155 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -7062,7 +7064,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|9 (; 156 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|9 (; 156 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -7089,7 +7091,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|10 (; 157 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|10 (; 157 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -7116,7 +7118,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|11 (; 158 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|11 (; 158 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -7144,7 +7146,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|12 (; 159 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|12 (; 159 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -7171,7 +7173,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|13 (; 160 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|13 (; 160 ;) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -7197,7 +7199,7 @@
   call $~lib/rt/pure/__release
   local.get $1
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|14 (; 161 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|14 (; 161 ;) (param $0 i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -7221,7 +7223,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor~anonymous|15 (; 162 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor~anonymous|15 (; 162 ;) (param $0 i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -7245,7 +7247,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor (; 163 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor (; 163 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -7335,33 +7337,33 @@
   call $~lib/rt/pure/__release
   local.get $0
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper.wrap<assembly/index/RewritePath> (; 164 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper.wrap<assembly/index/RewriteContext> (; 164 ;) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
   local.set $0
   i32.const 0
   local.get $0
-  call $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewritePath>#constructor
+  call $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/RewriteContext>#constructor
   local.set $1
   local.get $0
   call $~lib/rt/pure/__release
   local.get $1
  )
- (func $assembly/index/AddHeaderRoot#createContext (; 165 ;) (param $0 i32) (result i32)
+ (func $assembly/index/RewriteRoot#createContext (; 165 ;) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   i32.const 0
   local.get $0
-  call $assembly/index/RewritePath#constructor
+  call $assembly/index/RewriteContext#constructor
   local.tee $1
-  call $~lib/@solo-io/proxy-runtime/runtime/ContextHelper.wrap<assembly/index/RewritePath>
+  call $~lib/@solo-io/proxy-runtime/runtime/ContextHelper.wrap<assembly/index/RewriteContext>
   local.set $2
   local.get $1
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|7 (; 166 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/RewriteRoot>#constructor~anonymous|7 (; 166 ;) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -7381,13 +7383,13 @@
    unreachable
   end
   i32.load offset=48
-  call $assembly/index/AddHeaderRoot#createContext
+  call $assembly/index/RewriteRoot#createContext
   local.set $1
   local.get $0
   call $~lib/rt/pure/__release
   local.get $1
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|8 (; 167 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/RewriteRoot>#constructor~anonymous|8 (; 167 ;) (param $0 i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -7411,7 +7413,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor (; 168 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/RewriteRoot>#constructor (; 168 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -7480,14 +7482,14 @@
   call $~lib/rt/pure/__release
   local.get $0
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper.wrap<assembly/index/AddHeaderRoot> (; 169 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper.wrap<assembly/index/RewriteRoot> (; 169 ;) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
   local.set $0
   i32.const 0
   local.get $0
-  call $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor
+  call $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/RewriteRoot>#constructor
   local.set $1
   local.get $0
   call $~lib/rt/pure/__release
@@ -7497,9 +7499,9 @@
   (local $0 i32)
   (local $1 i32)
   i32.const 0
-  call $assembly/index/AddHeaderRoot#constructor
+  call $assembly/index/RewriteRoot#constructor
   local.tee $0
-  call $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper.wrap<assembly/index/AddHeaderRoot>
+  call $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper.wrap<assembly/index/RewriteRoot>
   local.set $1
   local.get $0
   call $~lib/rt/pure/__release
