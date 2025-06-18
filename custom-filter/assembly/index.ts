@@ -25,7 +25,6 @@ class AddHeader extends Context {
   onResponseHeaders(a: u32): FilterHeadersStatusValues {
     const root_context = this.root_context;
     if (root_context.configuration == "") {
-      // 特定のpathだったら
         stream_context.headers.response.add("test", "ok if");
         stream_context.headers.response.add("hello", "world!");
         return FilterHeadersStatusValues.Continue;
