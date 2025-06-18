@@ -6,7 +6,7 @@ import {
   ContextHelper,
   registerRootContext,
   FilterHeadersStatusValues,
-  stream_context
+  stream_context,
 } from "@solo-io/proxy-runtime";
 
 class AddHeaderRoot extends RootContext {
@@ -26,8 +26,8 @@ class AddHeaderRoot extends RootContext {
 
 class AddHeader extends Context {
   root_context: AddHeaderRoot;
-  req_path: string = "";
-  req_path1: string = "";  // ← 宣言を追加
+  req_path: string = "";   // 書き換え前のパス
+  req_path1: string = "";  // 書き換え後のパスまたは失敗時のマーク
 
   constructor(root_context: AddHeaderRoot) {
     super();
@@ -36,18 +36,21 @@ class AddHeader extends Context {
 
   onRequestHeaders(_numHeaders: u32): FilterHeadersStatusValues {
     const path = stream_context.headers.request.get(":path");
+
     if (path !== null) {
       this.req_path = path;
-      // 書き換えロジック
+
+      // 条件一致で path を書き換える
       if (path === "/health/liveness") {
         stream_context.headers.request.replace(":path", "/health/rediness");
       }
-    }
 
-    // 書き換え後の path を再取得して確認用に保持
-    const path1 = stream_context.headers.request.get(":path");
-    if (path1 !== null) {
-      this.req_path1 = path1;
+      // 書き換え後のパスを取得して検証用に保存
+      const new_path = stream_context.headers.request.get(":path");
+      this.req_path1 = new_path !== null ? new_path : "replace_failed";
+    } else {
+      this.req_path = "null_path";
+      this.req_path1 = "null_path";
     }
 
     return FilterHeadersStatusValues.Continue;
@@ -56,9 +59,11 @@ class AddHeader extends Context {
   onResponseHeaders(_numHeaders: u32): FilterHeadersStatusValues {
     const root_context = this.root_context;
 
-    stream_context.headers.response.add("path_test", this.req_path);   // 変換前
-    stream_context.headers.response.add("path_test2", this.req_path1); // 変換後
+    // デバッグ用のパスヘッダー出力
+    stream_context.headers.response.add("path_test", this.req_path);
+    stream_context.headers.response.add("path_test2", this.req_path1);
 
+    // コンフィグに応じたヘッダー追加
     if (root_context.configuration == "") {
       stream_context.headers.response.add("hello", "world!");
       stream_context.headers.response.add("test", "hit");
