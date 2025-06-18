@@ -26,7 +26,7 @@ class AddHeaderRoot extends RootContext {
 
 class AddHeader extends Context {
   root_context: AddHeaderRoot;
-  req_path: string = ""; // リクエストパスを保持する変数
+  req_path: string = "";
 
   constructor(root_context: AddHeaderRoot) {
     super();
@@ -37,6 +37,10 @@ class AddHeader extends Context {
     const path = stream_context.headers.request.get(":path");
     if (path !== null) {
       this.req_path = path;
+      // path に応じて書き換え
+      if (path === "/health/liveness") {
+        stream_context.headers.request.replace(":path", "/health/rediness");
+      }
     }
     return FilterHeadersStatusValues.Continue;
   }
@@ -44,12 +48,11 @@ class AddHeader extends Context {
   onResponseHeaders(_numHeaders: u32): FilterHeadersStatusValues {
     const root_context = this.root_context;
 
-    stream_context.headers.response.add("path_test", this.req_path); // 保持しておいたパスを使う
+    stream_context.headers.response.add("path_test", this.req_path);
 
     if (root_context.configuration == "") {
       stream_context.headers.response.add("hello", "world!");
       stream_context.headers.response.add("test", "hit");
-      stream_context.headers.request.add(":path","/health/rediness");
     } else {
       stream_context.headers.response.add("hello", root_context.configuration);
       stream_context.headers.response.add("test", "miss");

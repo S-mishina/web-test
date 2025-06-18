@@ -15,6 +15,7 @@
  (import "wasi_unstable" "proc_exit" (func $~lib/bindings/wasi_unstable/proc_exit (param i32)))
  (import "env" "proxy_get_configuration" (func $~lib/@solo-io/proxy-runtime/imports/proxy_get_configuration (param i32 i32) (result i32)))
  (import "env" "proxy_get_header_map_value" (func $~lib/@solo-io/proxy-runtime/imports/proxy_get_header_map_value (param i32 i32 i32 i32 i32) (result i32)))
+ (import "env" "proxy_replace_header_map_value" (func $~lib/@solo-io/proxy-runtime/imports/proxy_replace_header_map_value (param i32 i32 i32 i32 i32) (result i32)))
  (import "env" "proxy_add_header_map_value" (func $~lib/@solo-io/proxy-runtime/imports/proxy_add_header_map_value (param i32 i32 i32 i32 i32) (result i32)))
  (import "env" "proxy_get_property" (func $~lib/@solo-io/proxy-runtime/imports/proxy_get_property (param i32 i32 i32 i32) (result i32)))
  (memory $0 1)
@@ -35,21 +36,22 @@
  (data (i32.const 1152) "\04\00\00\00\01\00\00\00\01\00\00\00\04\00\00\00:\00(\00")
  (data (i32.const 1184) "\00\00\00\00\01\00\00\00\01\00\00\00\00\00\00\00")
  (data (i32.const 1200) "\n\00\00\00\01\00\00\00\01\00\00\00\n\00\00\00:\00p\00a\00t\00h\00")
- (data (i32.const 1232) "\12\00\00\00\01\00\00\00\01\00\00\00\12\00\00\00p\00a\00t\00h\00_\00t\00e\00s\00t\00")
- (data (i32.const 1280) "\n\00\00\00\01\00\00\00\01\00\00\00\n\00\00\00h\00e\00l\00l\00o\00")
- (data (i32.const 1312) "\0c\00\00\00\01\00\00\00\01\00\00\00\0c\00\00\00w\00o\00r\00l\00d\00!\00")
- (data (i32.const 1344) "\08\00\00\00\01\00\00\00\01\00\00\00\08\00\00\00t\00e\00s\00t\00")
- (data (i32.const 1376) "\06\00\00\00\01\00\00\00\01\00\00\00\06\00\00\00h\00i\00t\00")
- (data (i32.const 1408) " \00\00\00\01\00\00\00\01\00\00\00 \00\00\00/\00h\00e\00a\00l\00t\00h\00/\00r\00e\00d\00i\00n\00e\00s\00s\00")
- (data (i32.const 1456) "\08\00\00\00\01\00\00\00\01\00\00\00\08\00\00\00m\00i\00s\00s\00")
- (data (i32.const 1488) "\14\00\00\00\01\00\00\00\01\00\00\00\14\00\00\00a\00d\00d\00_\00h\00e\00a\00d\00e\00r\00")
- (data (i32.const 1536) "$\00\00\00\01\00\00\00\01\00\00\00$\00\00\00K\00e\00y\00 \00d\00o\00e\00s\00 \00n\00o\00t\00 \00e\00x\00i\00s\00t\00")
- (data (i32.const 1600) "\16\00\00\00\01\00\00\00\01\00\00\00\16\00\00\00~\00l\00i\00b\00/\00m\00a\00p\00.\00t\00s\00")
- (data (i32.const 1648) "\1c\00\00\00\01\00\00\00\01\00\00\00\1c\00\00\00p\00l\00u\00g\00i\00n\00_\00r\00o\00o\00t\00_\00i\00d\00")
- (data (i32.const 1696) ",\00\00\00\01\00\00\00\01\00\00\00,\00\00\00r\00e\00t\00u\00r\00n\00i\00n\00g\00 \00c\00o\00n\00t\00e\00x\00t\00 \00f\00o\00r\00 \00")
- (data (i32.const 1760) "\08\00\00\00\01\00\00\00\01\00\00\00\08\00\00\00n\00u\00l\00l\00")
- (data (i32.const 1792) "*\00\00\00\01\00\00\00\01\00\00\00*\00\00\00d\00i\00d\00 \00n\00o\00t\00 \00f\00i\00n\00d\00 \00r\00o\00o\00t\00 \00i\00d\00 \00")
- (data (i32.const 1856) "\19\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\98 \01\00\00\00\00\00\10\00\00\00\n\00\00\00\10\00\00\00\n\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\98 \01\00\00\00\00\00\10\00\00\00\00\00\00\00\98 \01\00\00\00\00\00\98\00A\00\00\00\00\00\10\00\00\00\0c\00\00\00\93\00\00\00\02\00\00\00\10\00\00\00\0c\00\00\00\10\00\00\00\0d\00\00\00\10\00\00\00\0d\00\00\00")
+ (data (i32.const 1232) " \00\00\00\01\00\00\00\01\00\00\00 \00\00\00/\00h\00e\00a\00l\00t\00h\00/\00l\00i\00v\00e\00n\00e\00s\00s\00")
+ (data (i32.const 1280) " \00\00\00\01\00\00\00\01\00\00\00 \00\00\00/\00h\00e\00a\00l\00t\00h\00/\00r\00e\00d\00i\00n\00e\00s\00s\00")
+ (data (i32.const 1328) "\12\00\00\00\01\00\00\00\01\00\00\00\12\00\00\00p\00a\00t\00h\00_\00t\00e\00s\00t\00")
+ (data (i32.const 1376) "\n\00\00\00\01\00\00\00\01\00\00\00\n\00\00\00h\00e\00l\00l\00o\00")
+ (data (i32.const 1408) "\0c\00\00\00\01\00\00\00\01\00\00\00\0c\00\00\00w\00o\00r\00l\00d\00!\00")
+ (data (i32.const 1440) "\08\00\00\00\01\00\00\00\01\00\00\00\08\00\00\00t\00e\00s\00t\00")
+ (data (i32.const 1472) "\06\00\00\00\01\00\00\00\01\00\00\00\06\00\00\00h\00i\00t\00")
+ (data (i32.const 1504) "\08\00\00\00\01\00\00\00\01\00\00\00\08\00\00\00m\00i\00s\00s\00")
+ (data (i32.const 1536) "\14\00\00\00\01\00\00\00\01\00\00\00\14\00\00\00a\00d\00d\00_\00h\00e\00a\00d\00e\00r\00")
+ (data (i32.const 1584) "$\00\00\00\01\00\00\00\01\00\00\00$\00\00\00K\00e\00y\00 \00d\00o\00e\00s\00 \00n\00o\00t\00 \00e\00x\00i\00s\00t\00")
+ (data (i32.const 1648) "\16\00\00\00\01\00\00\00\01\00\00\00\16\00\00\00~\00l\00i\00b\00/\00m\00a\00p\00.\00t\00s\00")
+ (data (i32.const 1696) "\1c\00\00\00\01\00\00\00\01\00\00\00\1c\00\00\00p\00l\00u\00g\00i\00n\00_\00r\00o\00o\00t\00_\00i\00d\00")
+ (data (i32.const 1744) ",\00\00\00\01\00\00\00\01\00\00\00,\00\00\00r\00e\00t\00u\00r\00n\00i\00n\00g\00 \00c\00o\00n\00t\00e\00x\00t\00 \00f\00o\00r\00 \00")
+ (data (i32.const 1808) "\08\00\00\00\01\00\00\00\01\00\00\00\08\00\00\00n\00u\00l\00l\00")
+ (data (i32.const 1840) "*\00\00\00\01\00\00\00\01\00\00\00*\00\00\00d\00i\00d\00 \00n\00o\00t\00 \00f\00i\00n\00d\00 \00r\00o\00o\00t\00 \00i\00d\00 \00")
+ (data (i32.const 1904) "\19\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\98 \01\00\00\00\00\00\10\00\00\00\n\00\00\00\10\00\00\00\n\00\00\00\10\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\98 \01\00\00\00\00\00\10\00\00\00\00\00\00\00\98 \01\00\00\00\00\00\98\00A\00\00\00\00\00\10\00\00\00\0c\00\00\00\93\00\00\00\02\00\00\00\10\00\00\00\0c\00\00\00\10\00\00\00\0d\00\00\00\10\00\00\00\0d\00\00\00")
  (table $0 50 funcref)
  (elem (i32.const 1) $~lib/@solo-io/proxy-runtime/runtime/BaseContext#constructor~anonymous|0 $~lib/@solo-io/proxy-runtime/runtime/BaseContext#constructor~anonymous|1 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|0 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|1 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|2 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|3 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|4 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|5 $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|6 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|0 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|1 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|2 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|3 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|4 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|5 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|6 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|0 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|1 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|2 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|3 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|4 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|5 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|6 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|7 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|8 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|9 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|10 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|11 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|12 $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|13 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|0 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|1 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|2 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|3 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|4 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|5 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|6 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|7 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|8 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|9 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|10 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|11 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|12 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|13 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|14 $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|15 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|7 $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|8 $start:assembly/index~anonymous|0)
  (global $~lib/rt/tlsf/ROOT (mut i32) (i32.const 0))
@@ -136,8 +138,8 @@
  (global $~lib/rt/tlsf/collectLock (mut i32) (i32.const 0))
  (global $~lib/gc/gc.auto (mut i32) (i32.const 1))
  (global $~argumentsLength (mut i32) (i32.const 0))
- (global $~lib/rt/__rtti_base i32 (i32.const 1856))
- (global $~lib/heap/__heap_base i32 (i32.const 2060))
+ (global $~lib/rt/__rtti_base i32 (i32.const 1904))
+ (global $~lib/heap/__heap_base i32 (i32.const 2108))
  (export "__setArgumentsLength" (func $~setArgumentsLength))
  (export "memory" (memory $0))
  (export "__alloc" (func $~lib/rt/tlsf/__alloc))
@@ -174,7 +176,7 @@
  (export "proxy_on_log" (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_log))
  (export "proxy_on_delete" (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_delete))
  (start $~start)
- (func $~lib/rt/pure/increment (; 6 ;) (param $0 i32)
+ (func $~lib/rt/pure/increment (; 7 ;) (param $0 i32)
   (local $1 i32)
   local.get $0
   i32.load offset=4
@@ -217,7 +219,7 @@
    unreachable
   end
  )
- (func $~lib/rt/pure/__retain (; 7 ;) (param $0 i32) (result i32)
+ (func $~lib/rt/pure/__retain (; 8 ;) (param $0 i32) (result i32)
   local.get $0
   global.get $~lib/heap/__heap_base
   i32.gt_u
@@ -229,7 +231,7 @@
   end
   local.get $0
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ArrayBufferReference#constructor (; 8 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ArrayBufferReference#constructor (; 9 ;) (param $0 i32) (result i32)
   local.get $0
   i32.eqz
   if
@@ -247,7 +249,7 @@
   i32.store offset=4
   local.get $0
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Reference<u32>#constructor (; 9 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Reference<u32>#constructor (; 10 ;) (param $0 i32) (result i32)
   local.get $0
   i32.eqz
   if
@@ -262,7 +264,7 @@
   i32.store
   local.get $0
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Reference<u64>#constructor (; 10 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Reference<u64>#constructor (; 11 ;) (param $0 i32) (result i32)
   local.get $0
   i32.eqz
   if
@@ -277,7 +279,7 @@
   i64.store
   local.get $0
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Reference<usize>#constructor (; 11 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Reference<usize>#constructor (; 12 ;) (param $0 i32) (result i32)
   local.get $0
   i32.eqz
   if
@@ -292,7 +294,7 @@
   i32.store
   local.get $0
  )
- (func $~lib/rt/pure/__release (; 12 ;) (param $0 i32)
+ (func $~lib/rt/pure/__release (; 13 ;) (param $0 i32)
   local.get $0
   global.get $~lib/heap/__heap_base
   i32.gt_u
@@ -303,7 +305,7 @@
    call $~lib/rt/pure/decrement
   end
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/StreamContext#constructor (; 13 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/StreamContext#constructor (; 14 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -368,7 +370,7 @@
   call $~lib/rt/pure/__release
   local.get $0
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/HeaderMapManipulator#constructor (; 14 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/HeaderMapManipulator#constructor (; 15 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -433,7 +435,7 @@
   call $~lib/rt/pure/__release
   local.get $0
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#constructor (; 15 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#constructor (; 16 ;) (param $0 i32) (param $1 i32) (result i32)
   local.get $0
   i32.eqz
   if
@@ -451,7 +453,7 @@
   i32.store
   local.get $0
  )
- (func $~lib/memory/memory.fill (; 16 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/memory/memory.fill (; 17 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -715,7 +717,7 @@
    end
   end
  )
- (func $~lib/arraybuffer/ArrayBuffer#constructor (; 17 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/arraybuffer/ArrayBuffer#constructor (; 18 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $1
   i32.const 1073741808
@@ -739,7 +741,7 @@
   local.get $2
   call $~lib/rt/pure/__retain
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#clear (; 18 ;) (param $0 i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#clear (; 19 ;) (param $0 i32)
   (local $1 i32)
   (local $2 i32)
   local.get $0
@@ -779,7 +781,7 @@
   i32.const 0
   i32.store offset=20
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#constructor (; 19 ;) (param $0 i32) (result i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#constructor (; 20 ;) (param $0 i32) (result i32)
   local.get $0
   i32.eqz
   if
@@ -811,7 +813,7 @@
   call $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#clear
   local.get $0
  )
- (func "$~lib/map/Map<~lib/string/String,() => ~lib/@solo-io/proxy-runtime/runtime/RootContext>#clear" (; 20 ;) (param $0 i32)
+ (func "$~lib/map/Map<~lib/string/String,() => ~lib/@solo-io/proxy-runtime/runtime/RootContext>#clear" (; 21 ;) (param $0 i32)
   (local $1 i32)
   (local $2 i32)
   local.get $0
@@ -851,7 +853,7 @@
   i32.const 0
   i32.store offset=20
  )
- (func "$~lib/map/Map<~lib/string/String,() => ~lib/@solo-io/proxy-runtime/runtime/RootContext>#constructor" (; 21 ;) (param $0 i32) (result i32)
+ (func "$~lib/map/Map<~lib/string/String,() => ~lib/@solo-io/proxy-runtime/runtime/RootContext>#constructor" (; 22 ;) (param $0 i32) (result i32)
   local.get $0
   i32.eqz
   if
@@ -883,7 +885,7 @@
   call "$~lib/map/Map<~lib/string/String,() => ~lib/@solo-io/proxy-runtime/runtime/RootContext>#clear"
   local.get $0
  )
- (func $start:~lib/@solo-io/proxy-runtime/runtime (; 22 ;)
+ (func $start:~lib/@solo-io/proxy-runtime/runtime (; 23 ;)
   (local $0 i32)
   (local $1 i32)
   (local $2 i32)
@@ -946,7 +948,7 @@
   local.get $5
   call $~lib/rt/pure/__release
  )
- (func $~lib/string/String#get:length (; 23 ;) (param $0 i32) (result i32)
+ (func $~lib/string/String#get:length (; 24 ;) (param $0 i32) (result i32)
   local.get $0
   i32.const 16
   i32.sub
@@ -954,7 +956,7 @@
   i32.const 1
   i32.shr_u
  )
- (func $~lib/util/string/compareImpl (; 24 ;) (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (result i32)
+ (func $~lib/util/string/compareImpl (; 25 ;) (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (result i32)
   (local $5 i32)
   (local $6 i32)
   (local $7 i32)
@@ -1076,7 +1078,7 @@
   call $~lib/rt/pure/__release
   local.get $7
  )
- (func $~lib/string/String.__eq (; 25 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/string/String.__eq (; 26 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   local.get $0
@@ -1149,7 +1151,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/string/String.__ne (; 26 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/string/String.__ne (; 27 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -1168,11 +1170,11 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/string/String#toString (; 27 ;) (param $0 i32) (result i32)
+ (func $~lib/string/String#toString (; 28 ;) (param $0 i32) (result i32)
   local.get $0
   call $~lib/rt/pure/__retain
  )
- (func $~lib/string/String.UTF8.byteLength (; 28 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/string/String.UTF8.byteLength (; 29 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -1283,7 +1285,7 @@
   call $~lib/rt/pure/__release
   local.get $5
  )
- (func $~lib/string/String.UTF8.encode (; 29 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/string/String.UTF8.encode (; 30 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -1535,13 +1537,13 @@
   call $~lib/rt/pure/__release
   local.get $8
  )
- (func $~lib/arraybuffer/ArrayBuffer#get:byteLength (; 30 ;) (param $0 i32) (result i32)
+ (func $~lib/arraybuffer/ArrayBuffer#get:byteLength (; 31 ;) (param $0 i32) (result i32)
   local.get $0
   i32.const 16
   i32.sub
   i32.load offset=12
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/log (; 31 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/log (; 32 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   local.get $1
   call $~lib/rt/pure/__retain
@@ -1561,7 +1563,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/abort_proc_exit (; 32 ;) (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/abort_proc_exit (; 33 ;) (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32)
   (local $4 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -1588,7 +1590,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $~lib/rt/tlsf/removeBlock (; 33 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/rt/tlsf/removeBlock (; 34 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -1798,7 +1800,7 @@
    end
   end
  )
- (func $~lib/rt/tlsf/insertBlock (; 34 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/rt/tlsf/insertBlock (; 35 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -2148,7 +2150,7 @@
   local.get $7
   i32.store offset=4
  )
- (func $~lib/rt/tlsf/addMemory (; 35 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/rt/tlsf/addMemory (; 36 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -2296,7 +2298,7 @@
   call $~lib/rt/tlsf/insertBlock
   i32.const 1
  )
- (func $~lib/rt/tlsf/maybeInitialize (; 36 ;) (result i32)
+ (func $~lib/rt/tlsf/maybeInitialize (; 37 ;) (result i32)
   (local $0 i32)
   (local $1 i32)
   (local $2 i32)
@@ -2446,7 +2448,7 @@
   end
   local.get $0
  )
- (func $~lib/rt/tlsf/prepareSize (; 37 ;) (param $0 i32) (result i32)
+ (func $~lib/rt/tlsf/prepareSize (; 38 ;) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   local.get $0
@@ -2475,7 +2477,7 @@
   i32.gt_u
   select
  )
- (func $~lib/rt/tlsf/searchBlock (; 38 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/rt/tlsf/searchBlock (; 39 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -2658,7 +2660,7 @@
   end
   local.get $7
  )
- (func $~lib/rt/tlsf/growMemory (; 39 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/rt/tlsf/growMemory (; 40 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -2742,7 +2744,7 @@
   call $~lib/rt/tlsf/addMemory
   drop
  )
- (func $~lib/rt/tlsf/prepareBlock (; 40 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/rt/tlsf/prepareBlock (; 41 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -2837,7 +2839,7 @@
    i32.store
   end
  )
- (func $~lib/rt/tlsf/allocateBlock (; 41 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/rt/tlsf/allocateBlock (; 42 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   (local $4 i32)
   global.get $~lib/rt/tlsf/collectLock
@@ -2946,7 +2948,7 @@
   call $~lib/rt/tlsf/prepareBlock
   local.get $4
  )
- (func $~lib/rt/tlsf/__alloc (; 42 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/rt/tlsf/__alloc (; 43 ;) (param $0 i32) (param $1 i32) (result i32)
   call $~lib/rt/tlsf/maybeInitialize
   local.get $0
   local.get $1
@@ -2954,10 +2956,10 @@
   i32.const 16
   i32.add
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/BaseContext#onDone (; 43 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/BaseContext#onDone (; 44 ;) (param $0 i32) (result i32)
   i32.const 1
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/BaseContext#constructor~anonymous|0 (; 44 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/BaseContext#constructor~anonymous|0 (; 45 ;) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -2969,10 +2971,10 @@
   call $~lib/rt/pure/__release
   local.get $1
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/BaseContext#onDelete (; 45 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/BaseContext#onDelete (; 46 ;) (param $0 i32)
   nop
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/BaseContext#constructor~anonymous|1 (; 46 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/BaseContext#constructor~anonymous|1 (; 47 ;) (param $0 i32)
   local.get $0
   call $~lib/rt/pure/__retain
   local.set $0
@@ -2981,7 +2983,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/BaseContext#constructor (; 47 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/BaseContext#constructor (; 48 ;) (param $0 i32) (result i32)
   local.get $0
   i32.eqz
   if
@@ -3008,7 +3010,7 @@
   i32.store offset=8
   local.get $0
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/HttpCallback>#clear (; 48 ;) (param $0 i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/HttpCallback>#clear (; 49 ;) (param $0 i32)
   (local $1 i32)
   (local $2 i32)
   local.get $0
@@ -3048,7 +3050,7 @@
   i32.const 0
   i32.store offset=20
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/HttpCallback>#constructor (; 49 ;) (param $0 i32) (result i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/HttpCallback>#constructor (; 50 ;) (param $0 i32) (result i32)
   local.get $0
   i32.eqz
   if
@@ -3080,7 +3082,7 @@
   call $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/HttpCallback>#clear
   local.get $0
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/GrpcCallback>#clear (; 50 ;) (param $0 i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/GrpcCallback>#clear (; 51 ;) (param $0 i32)
   (local $1 i32)
   (local $2 i32)
   local.get $0
@@ -3120,7 +3122,7 @@
   i32.const 0
   i32.store offset=20
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/GrpcCallback>#constructor (; 51 ;) (param $0 i32) (result i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/GrpcCallback>#constructor (; 52 ;) (param $0 i32) (result i32)
   local.get $0
   i32.eqz
   if
@@ -3152,10 +3154,10 @@
   call $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/GrpcCallback>#clear
   local.get $0
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#validateConfiguration (; 52 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#validateConfiguration (; 53 ;) (param $0 i32) (param $1 i32) (result i32)
   i32.const 1
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|0 (; 53 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|0 (; 54 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -3168,10 +3170,10 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#onConfigure (; 54 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#onConfigure (; 55 ;) (param $0 i32) (result i32)
   i32.const 1
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|1 (; 55 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|1 (; 56 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -3183,10 +3185,10 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#onStart (; 56 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#onStart (; 57 ;) (param $0 i32) (param $1 i32) (result i32)
   i32.const 1
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|2 (; 57 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|2 (; 58 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -3199,10 +3201,10 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#onTick (; 58 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#onTick (; 59 ;) (param $0 i32)
   nop
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|3 (; 59 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|3 (; 60 ;) (param $0 i32)
   local.get $0
   call $~lib/rt/pure/__retain
   local.set $0
@@ -3211,10 +3213,10 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#onQueueReady (; 60 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#onQueueReady (; 61 ;) (param $0 i32) (param $1 i32)
   nop
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|4 (; 61 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|4 (; 62 ;) (param $0 i32) (param $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
   local.set $0
@@ -3224,7 +3226,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#createContext (; 62 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#createContext (; 63 ;) (param $0 i32) (result i32)
   global.get $~lib/@solo-io/proxy-runtime/runtime/LogLevelValues.critical
   i32.const 352
   call $~lib/@solo-io/proxy-runtime/runtime/log
@@ -3235,7 +3237,7 @@
   call $~lib/@solo-io/proxy-runtime/runtime/abort_proc_exit
   unreachable
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|5 (; 63 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|5 (; 64 ;) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -3247,7 +3249,7 @@
   call $~lib/rt/pure/__release
   local.get $1
  )
- (func $~lib/rt/__instanceof (; 64 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/rt/__instanceof (; 65 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -3287,7 +3289,7 @@
   end
   i32.const 0
  )
- (func $~lib/arraybuffer/ArrayBufferView#constructor (; 65 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/arraybuffer/ArrayBufferView#constructor (; 66 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -3359,7 +3361,7 @@
   i32.store offset=8
   local.get $0
  )
- (func $~lib/array/Array<u32>#constructor (; 66 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/array/Array<u32>#constructor (; 67 ;) (param $0 i32) (param $1 i32) (result i32)
   local.get $0
   if (result i32)
    local.get $0
@@ -3381,7 +3383,7 @@
   i32.store offset=12
   local.get $0
  )
- (func $~lib/rt/tlsf/checkUsedBlock (; 67 ;) (param $0 i32) (result i32)
+ (func $~lib/rt/tlsf/checkUsedBlock (; 68 ;) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   i32.const 16
@@ -3427,7 +3429,7 @@
   end
   local.get $1
  )
- (func $~lib/util/memory/memcpy (; 68 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/util/memory/memcpy (; 69 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -4451,7 +4453,7 @@
    i32.store8
   end
  )
- (func $~lib/memory/memory.copy (; 69 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/memory/memory.copy (; 70 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -4671,7 +4673,7 @@
    end
   end
  )
- (func $~lib/rt/tlsf/freeBlock (; 70 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/rt/tlsf/freeBlock (; 71 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   local.get $1
   i32.load
@@ -4685,7 +4687,7 @@
   local.get $1
   call $~lib/rt/tlsf/insertBlock
  )
- (func $~lib/rt/tlsf/reallocateBlock (; 71 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/rt/tlsf/reallocateBlock (; 72 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -4801,7 +4803,7 @@
   end
   local.get $8
  )
- (func $~lib/rt/tlsf/__realloc (; 72 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/rt/tlsf/__realloc (; 73 ;) (param $0 i32) (param $1 i32) (result i32)
   call $~lib/rt/tlsf/maybeInitialize
   local.get $0
   call $~lib/rt/tlsf/checkUsedBlock
@@ -4810,7 +4812,7 @@
   i32.const 16
   i32.add
  )
- (func $~lib/array/ensureSize (; 73 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/array/ensureSize (; 74 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -4872,7 +4874,7 @@
    i32.store offset=8
   end
  )
- (func $~lib/array/Array<u32>#__unchecked_set (; 74 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/array/Array<u32>#__unchecked_set (; 75 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   local.get $0
   i32.load offset=4
   local.get $1
@@ -4882,7 +4884,7 @@
   local.get $2
   i32.store
  )
- (func $~lib/array/Array<u32>#__set (; 75 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/array/Array<u32>#__set (; 76 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   local.get $1
   local.get $0
   i32.load offset=12
@@ -4916,7 +4918,7 @@
   local.get $2
   call $~lib/array/Array<u32>#__unchecked_set
  )
- (func $~lib/array/Array<u32>#set:length (; 76 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/array/Array<u32>#set:length (; 77 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   local.get $0
   i32.load offset=12
@@ -4929,7 +4931,7 @@
   local.get $1
   i32.store offset=12
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/HttpCallback>#keys (; 77 ;) (param $0 i32) (result i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/HttpCallback>#keys (; 78 ;) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -4994,11 +4996,11 @@
   call $~lib/array/Array<u32>#set:length
   local.get $3
  )
- (func $~lib/array/Array<u32>#get:length (; 78 ;) (param $0 i32) (result i32)
+ (func $~lib/array/Array<u32>#get:length (; 79 ;) (param $0 i32) (result i32)
   local.get $0
   i32.load offset=12
  )
- (func $~lib/array/Array<u32>#__unchecked_get (; 79 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/array/Array<u32>#__unchecked_get (; 80 ;) (param $0 i32) (param $1 i32) (result i32)
   local.get $0
   i32.load offset=4
   local.get $1
@@ -5007,7 +5009,7 @@
   i32.add
   i32.load
  )
- (func $~lib/array/Array<u32>#__get (; 80 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/array/Array<u32>#__get (; 81 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $1
   local.get $0
@@ -5027,7 +5029,7 @@
   local.set $2
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#cancelPendingRequests (; 81 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#cancelPendingRequests (; 82 ;) (param $0 i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -5063,12 +5065,12 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#onDone (; 82 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#onDone (; 83 ;) (param $0 i32) (result i32)
   local.get $0
   call $~lib/@solo-io/proxy-runtime/runtime/RootContext#cancelPendingRequests
   i32.const 1
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|6 (; 83 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor~anonymous|6 (; 84 ;) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5093,7 +5095,7 @@
   call $~lib/rt/pure/__release
   local.get $1
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor (; 84 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#constructor (; 85 ;) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   local.get $0
@@ -5177,7 +5179,7 @@
   i32.store offset=4
   local.get $0
  )
- (func $assembly/index/AddHeaderRoot#constructor (; 85 ;) (param $0 i32) (result i32)
+ (func $assembly/index/AddHeaderRoot#constructor (; 86 ;) (param $0 i32) (result i32)
   local.get $0
   i32.eqz
   if
@@ -5195,7 +5197,7 @@
   i32.store offset=48
   local.get $0
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|0 (; 86 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|0 (; 87 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5222,17 +5224,17 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ArrayBufferReference#bufferPtr (; 87 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ArrayBufferReference#bufferPtr (; 88 ;) (param $0 i32) (result i32)
   local.get $0
   i32.const 0
   i32.add
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ArrayBufferReference#sizePtr (; 88 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ArrayBufferReference#sizePtr (; 89 ;) (param $0 i32) (result i32)
   local.get $0
   i32.const 4
   i32.add
  )
- (func $~lib/util/number/decimalCount32 (; 89 ;) (param $0 i32) (result i32)
+ (func $~lib/util/number/decimalCount32 (; 90 ;) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   i32.const 100000
@@ -5298,7 +5300,7 @@
   end
   unreachable
  )
- (func $~lib/util/number/utoa32_lut (; 90 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/util/number/utoa32_lut (; 91 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -5442,7 +5444,7 @@
    i32.store16
   end
  )
- (func $~lib/util/number/utoa32 (; 91 ;) (param $0 i32) (result i32)
+ (func $~lib/util/number/utoa32 (; 92 ;) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -5476,16 +5478,16 @@
   local.get $2
   call $~lib/rt/pure/__retain
  )
- (func $~lib/util/number/itoa<u32> (; 92 ;) (param $0 i32) (result i32)
+ (func $~lib/util/number/itoa<u32> (; 93 ;) (param $0 i32) (result i32)
   local.get $0
   call $~lib/util/number/utoa32
   return
  )
- (func $~lib/number/U32#toString (; 93 ;) (param $0 i32) (result i32)
+ (func $~lib/number/U32#toString (; 94 ;) (param $0 i32) (result i32)
   local.get $0
   call $~lib/util/number/itoa<u32>
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/CHECK_RESULT (; 94 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/CHECK_RESULT (; 95 ;) (param $0 i32)
   (local $1 i32)
   local.get $0
   i32.const 0
@@ -5506,11 +5508,11 @@
    unreachable
   end
  )
- (func $~lib/@solo-io/proxy-runtime/malloc/free (; 95 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/malloc/free (; 96 ;) (param $0 i32)
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ArrayBufferReference#toArrayBuffer (; 96 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ArrayBufferReference#toArrayBuffer (; 97 ;) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   i32.load offset=4
@@ -5531,7 +5533,7 @@
   call $~lib/@solo-io/proxy-runtime/malloc/free
   local.get $1
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#getConfiguration (; 97 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#getConfiguration (; 98 ;) (param $0 i32) (result i32)
   (local $1 i32)
   global.get $~lib/@solo-io/proxy-runtime/runtime/globalArrayBufferReference
   call $~lib/@solo-io/proxy-runtime/runtime/ArrayBufferReference#bufferPtr
@@ -5544,7 +5546,7 @@
   local.set $1
   local.get $1
  )
- (func $~lib/string/String.UTF8.decodeUnsafe (; 98 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/string/String.UTF8.decodeUnsafe (; 99 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -5760,7 +5762,7 @@
   call $~lib/rt/tlsf/__realloc
   call $~lib/rt/pure/__retain
  )
- (func $~lib/string/String.UTF8.decode (; 99 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/string/String.UTF8.decode (; 100 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5775,7 +5777,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $assembly/index/AddHeaderRoot#onConfigure (; 100 ;) (param $0 i32) (result i32)
+ (func $assembly/index/AddHeaderRoot#onConfigure (; 101 ;) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -5813,7 +5815,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|1 (; 101 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|1 (; 102 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5839,7 +5841,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|2 (; 102 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|2 (; 103 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5866,7 +5868,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|3 (; 103 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|3 (; 104 ;) (param $0 i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5890,7 +5892,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|4 (; 104 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|4 (; 105 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5915,7 +5917,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|5 (; 105 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|5 (; 106 ;) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5941,10 +5943,10 @@
   call $~lib/rt/pure/__release
   local.get $1
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#done (; 106 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#done (; 107 ;) (param $0 i32)
   nop
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|6 (; 107 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|6 (; 108 ;) (param $0 i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5968,10 +5970,10 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#onNewConnection (; 108 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#onNewConnection (; 109 ;) (param $0 i32) (result i32)
   global.get $~lib/@solo-io/proxy-runtime/runtime/FilterStatusValues.Continue
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|0 (; 109 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|0 (; 110 ;) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -5983,10 +5985,10 @@
   call $~lib/rt/pure/__release
   local.get $1
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#onDownstreamData (; 110 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#onDownstreamData (; 111 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   global.get $~lib/@solo-io/proxy-runtime/runtime/FilterStatusValues.Continue
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|1 (; 111 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|1 (; 112 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6000,10 +6002,10 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#onUpstreamData (; 112 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#onUpstreamData (; 113 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   global.get $~lib/@solo-io/proxy-runtime/runtime/FilterStatusValues.Continue
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|2 (; 113 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|2 (; 114 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6017,10 +6019,10 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#onDownstreamConnectionClose (; 114 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#onDownstreamConnectionClose (; 115 ;) (param $0 i32) (param $1 i32)
   nop
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|3 (; 115 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|3 (; 116 ;) (param $0 i32) (param $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
   local.set $0
@@ -6030,10 +6032,10 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#onUpstreamConnectionClose (; 116 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#onUpstreamConnectionClose (; 117 ;) (param $0 i32) (param $1 i32)
   nop
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|4 (; 117 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|4 (; 118 ;) (param $0 i32) (param $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
   local.set $0
@@ -6043,10 +6045,10 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#onRequestHeaders (; 118 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#onRequestHeaders (; 119 ;) (param $0 i32) (param $1 i32) (result i32)
   global.get $~lib/@solo-io/proxy-runtime/runtime/FilterHeadersStatusValues.Continue
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|5 (; 119 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|5 (; 120 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6059,10 +6061,10 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#onRequestMetadata (; 120 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#onRequestMetadata (; 121 ;) (param $0 i32) (param $1 i32) (result i32)
   global.get $~lib/@solo-io/proxy-runtime/runtime/FilterMetadataStatusValues.Continue
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|6 (; 121 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|6 (; 122 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6075,10 +6077,10 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#onRequestBody (; 122 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#onRequestBody (; 123 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   global.get $~lib/@solo-io/proxy-runtime/runtime/FilterDataStatusValues.Continue
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|7 (; 123 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|7 (; 124 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6092,10 +6094,10 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#onRequestTrailers (; 124 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#onRequestTrailers (; 125 ;) (param $0 i32) (param $1 i32) (result i32)
   global.get $~lib/@solo-io/proxy-runtime/runtime/FilterTrailersStatusValues.Continue
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|8 (; 125 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|8 (; 126 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6108,10 +6110,10 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#onResponseHeaders (; 126 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#onResponseHeaders (; 127 ;) (param $0 i32) (param $1 i32) (result i32)
   global.get $~lib/@solo-io/proxy-runtime/runtime/FilterHeadersStatusValues.Continue
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|9 (; 127 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|9 (; 128 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6124,10 +6126,10 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#onResponseMetadata (; 128 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#onResponseMetadata (; 129 ;) (param $0 i32) (param $1 i32) (result i32)
   global.get $~lib/@solo-io/proxy-runtime/runtime/FilterMetadataStatusValues.Continue
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|10 (; 129 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|10 (; 130 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6140,10 +6142,10 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#onResponseBody (; 130 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#onResponseBody (; 131 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   global.get $~lib/@solo-io/proxy-runtime/runtime/FilterDataStatusValues.Continue
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|11 (; 131 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|11 (; 132 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6157,10 +6159,10 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#onResponseTrailers (; 132 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#onResponseTrailers (; 133 ;) (param $0 i32) (param $1 i32) (result i32)
   global.get $~lib/@solo-io/proxy-runtime/runtime/FilterTrailersStatusValues.Continue
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|12 (; 133 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|12 (; 134 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6173,10 +6175,10 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#onLog (; 134 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#onLog (; 135 ;) (param $0 i32)
   nop
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|13 (; 135 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor~anonymous|13 (; 136 ;) (param $0 i32)
   local.get $0
   call $~lib/rt/pure/__retain
   local.set $0
@@ -6185,7 +6187,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor (; 136 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/Context#constructor (; 137 ;) (param $0 i32) (result i32)
   local.get $0
   if (result i32)
    local.get $0
@@ -6283,7 +6285,7 @@
   i32.store offset=64
   local.get $0
  )
- (func $assembly/index/AddHeader#constructor (; 137 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $assembly/index/AddHeader#constructor (; 138 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -6328,7 +6330,7 @@
   call $~lib/rt/pure/__release
   local.get $0
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|0 (; 138 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|0 (; 139 ;) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6354,7 +6356,7 @@
   call $~lib/rt/pure/__release
   local.get $1
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|1 (; 139 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|1 (; 140 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6382,7 +6384,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|2 (; 140 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|2 (; 141 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6410,7 +6412,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|3 (; 141 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|3 (; 142 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6435,7 +6437,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|4 (; 142 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|4 (; 143 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6460,7 +6462,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/get_header_map_value (; 143 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/get_header_map_value (; 144 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   local.get $1
@@ -6496,7 +6498,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/get_header_map_value_string (; 144 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/get_header_map_value_string (; 145 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -6523,7 +6525,7 @@
   call $~lib/rt/pure/__release
   local.get $4
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#get (; 145 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#get (; 146 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $1
   call $~lib/rt/pure/__retain
@@ -6537,7 +6539,75 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $assembly/index/AddHeader#onRequestHeaders (; 146 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/replace_header_map_value (; 147 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+  local.get $1
+  call $~lib/rt/pure/__retain
+  local.set $1
+  local.get $2
+  call $~lib/rt/pure/__retain
+  local.set $2
+  local.get $0
+  local.get $1
+  local.get $1
+  call $~lib/arraybuffer/ArrayBuffer#get:byteLength
+  local.get $2
+  local.get $2
+  call $~lib/arraybuffer/ArrayBuffer#get:byteLength
+  call $~lib/@solo-io/proxy-runtime/imports/proxy_replace_header_map_value
+  call $~lib/@solo-io/proxy-runtime/runtime/CHECK_RESULT
+  local.get $1
+  call $~lib/rt/pure/__release
+  local.get $2
+  call $~lib/rt/pure/__release
+ )
+ (func $~lib/@solo-io/proxy-runtime/runtime/replace_header_map_value_string (; 148 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  local.get $1
+  call $~lib/rt/pure/__retain
+  local.set $1
+  local.get $2
+  call $~lib/rt/pure/__retain
+  local.set $2
+  local.get $1
+  i32.const 0
+  call $~lib/string/String.UTF8.encode
+  local.set $3
+  local.get $2
+  i32.const 0
+  call $~lib/string/String.UTF8.encode
+  local.set $4
+  local.get $0
+  local.get $3
+  local.get $4
+  call $~lib/@solo-io/proxy-runtime/runtime/replace_header_map_value
+  local.get $3
+  call $~lib/rt/pure/__release
+  local.get $4
+  call $~lib/rt/pure/__release
+  local.get $1
+  call $~lib/rt/pure/__release
+  local.get $2
+  call $~lib/rt/pure/__release
+ )
+ (func $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#replace (; 149 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+  local.get $1
+  call $~lib/rt/pure/__retain
+  local.set $1
+  local.get $2
+  call $~lib/rt/pure/__retain
+  local.set $2
+  local.get $0
+  i32.load
+  local.get $1
+  local.get $2
+  call $~lib/@solo-io/proxy-runtime/runtime/replace_header_map_value_string
+  local.get $1
+  call $~lib/rt/pure/__release
+  local.get $2
+  call $~lib/rt/pure/__release
+ )
+ (func $assembly/index/AddHeader#onRequestHeaders (; 150 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -6569,6 +6639,17 @@
    end
    local.get $4
    i32.store offset=72
+   local.get $2
+   i32.const 1248
+   i32.eq
+   if
+    global.get $~lib/@solo-io/proxy-runtime/runtime/stream_context
+    i32.load
+    i32.load
+    i32.const 1216
+    i32.const 1296
+    call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#replace
+   end
   end
   global.get $~lib/@solo-io/proxy-runtime/runtime/FilterHeadersStatusValues.Continue
   local.set $3
@@ -6576,7 +6657,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|5 (; 147 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|5 (; 151 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6603,7 +6684,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|6 (; 148 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|6 (; 152 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6630,7 +6711,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|7 (; 149 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|7 (; 153 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6658,7 +6739,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|8 (; 150 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|8 (; 154 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6685,7 +6766,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/add_header_map_value_string (; 151 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/add_header_map_value_string (; 155 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -6722,7 +6803,7 @@
   call $~lib/rt/pure/__release
   local.get $5
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#add (; 152 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#add (; 156 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   local.get $1
   call $~lib/rt/pure/__retain
   local.set $1
@@ -6740,7 +6821,7 @@
   local.get $2
   call $~lib/rt/pure/__release
  )
- (func $assembly/index/AddHeader#onResponseHeaders (; 153 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $assembly/index/AddHeader#onResponseHeaders (; 157 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   local.get $0
@@ -6750,7 +6831,7 @@
   global.get $~lib/@solo-io/proxy-runtime/runtime/stream_context
   i32.load
   i32.load offset=4
-  i32.const 1248
+  i32.const 1344
   local.get $0
   i32.load offset=72
   call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#add
@@ -6762,34 +6843,28 @@
    global.get $~lib/@solo-io/proxy-runtime/runtime/stream_context
    i32.load
    i32.load offset=4
-   i32.const 1296
-   i32.const 1328
+   i32.const 1392
+   i32.const 1424
    call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#add
    global.get $~lib/@solo-io/proxy-runtime/runtime/stream_context
    i32.load
    i32.load offset=4
-   i32.const 1360
-   i32.const 1392
-   call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#add
-   global.get $~lib/@solo-io/proxy-runtime/runtime/stream_context
-   i32.load
-   i32.load
-   i32.const 1216
-   i32.const 1424
+   i32.const 1456
+   i32.const 1488
    call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#add
   else
    global.get $~lib/@solo-io/proxy-runtime/runtime/stream_context
    i32.load
    i32.load offset=4
-   i32.const 1296
+   i32.const 1392
    local.get $2
    i32.load offset=48
    call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#add
    global.get $~lib/@solo-io/proxy-runtime/runtime/stream_context
    i32.load
    i32.load offset=4
-   i32.const 1360
-   i32.const 1472
+   i32.const 1456
+   i32.const 1520
    call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#add
   end
   global.get $~lib/@solo-io/proxy-runtime/runtime/FilterHeadersStatusValues.Continue
@@ -6798,7 +6873,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|9 (; 154 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|9 (; 158 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6825,7 +6900,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|10 (; 155 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|10 (; 159 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6852,7 +6927,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|11 (; 156 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|11 (; 160 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6880,7 +6955,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|12 (; 157 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|12 (; 161 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6907,7 +6982,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|13 (; 158 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|13 (; 162 ;) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6933,7 +7008,7 @@
   call $~lib/rt/pure/__release
   local.get $1
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|14 (; 159 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|14 (; 163 ;) (param $0 i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6957,7 +7032,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|15 (; 160 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|15 (; 164 ;) (param $0 i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -6981,7 +7056,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor (; 161 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor (; 165 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -7071,7 +7146,7 @@
   call $~lib/rt/pure/__release
   local.get $0
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper.wrap<assembly/index/AddHeader> (; 162 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper.wrap<assembly/index/AddHeader> (; 166 ;) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -7084,7 +7159,7 @@
   call $~lib/rt/pure/__release
   local.get $1
  )
- (func $assembly/index/AddHeaderRoot#createContext (; 163 ;) (param $0 i32) (result i32)
+ (func $assembly/index/AddHeaderRoot#createContext (; 167 ;) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   i32.const 0
@@ -7097,7 +7172,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|7 (; 164 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|7 (; 168 ;) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -7123,7 +7198,7 @@
   call $~lib/rt/pure/__release
   local.get $1
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|8 (; 165 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor~anonymous|8 (; 169 ;) (param $0 i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -7147,7 +7222,7 @@
   local.get $0
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor (; 166 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper<assembly/index/AddHeaderRoot>#constructor (; 170 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -7216,7 +7291,7 @@
   call $~lib/rt/pure/__release
   local.get $0
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper.wrap<assembly/index/AddHeaderRoot> (; 167 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContextHelper.wrap<assembly/index/AddHeaderRoot> (; 171 ;) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -7229,7 +7304,7 @@
   call $~lib/rt/pure/__release
   local.get $1
  )
- (func $start:assembly/index~anonymous|0 (; 168 ;) (result i32)
+ (func $start:assembly/index~anonymous|0 (; 172 ;) (result i32)
   (local $0 i32)
   (local $1 i32)
   i32.const 0
@@ -7241,7 +7316,7 @@
   call $~lib/rt/pure/__release
   local.get $1
  )
- (func $~lib/util/hash/hashStr (; 169 ;) (param $0 i32) (result i32)
+ (func $~lib/util/hash/hashStr (; 173 ;) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -7292,7 +7367,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func "$~lib/map/Map<~lib/string/String,() => ~lib/@solo-io/proxy-runtime/runtime/RootContext>#find" (; 170 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func "$~lib/map/Map<~lib/string/String,() => ~lib/@solo-io/proxy-runtime/runtime/RootContext>#find" (; 174 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -7352,7 +7427,7 @@
   call $~lib/rt/pure/__release
   local.get $4
  )
- (func "$~lib/map/Map<~lib/string/String,() => ~lib/@solo-io/proxy-runtime/runtime/RootContext>#rehash" (; 171 ;) (param $0 i32) (param $1 i32)
+ (func "$~lib/map/Map<~lib/string/String,() => ~lib/@solo-io/proxy-runtime/runtime/RootContext>#rehash" (; 175 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -7514,7 +7589,7 @@
   local.get $5
   call $~lib/rt/pure/__release
  )
- (func "$~lib/map/Map<~lib/string/String,() => ~lib/@solo-io/proxy-runtime/runtime/RootContext>#set" (; 172 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func "$~lib/map/Map<~lib/string/String,() => ~lib/@solo-io/proxy-runtime/runtime/RootContext>#set" (; 176 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -7628,7 +7703,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/registerRootContext (; 173 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/registerRootContext (; 177 ;) (param $0 i32) (param $1 i32)
   local.get $1
   call $~lib/rt/pure/__retain
   local.set $1
@@ -7639,12 +7714,12 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $start:assembly/index (; 174 ;)
+ (func $start:assembly/index (; 178 ;)
   i32.const 49
-  i32.const 1504
+  i32.const 1552
   call $~lib/@solo-io/proxy-runtime/runtime/registerRootContext
  )
- (func $~lib/@solo-io/proxy-runtime/malloc/malloc (; 175 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/malloc/malloc (; 179 ;) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -7661,10 +7736,10 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_abi_version_0_1_0 (; 176 ;)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_abi_version_0_1_0 (; 180 ;)
   nop
  )
- (func $~lib/util/hash/hash32 (; 177 ;) (param $0 i32) (result i32)
+ (func $~lib/util/hash/hash32 (; 181 ;) (param $0 i32) (result i32)
   (local $1 i32)
   i32.const -2128831035
   local.set $1
@@ -7706,7 +7781,7 @@
   local.set $1
   local.get $1
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#find (; 178 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#find (; 182 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   (local $4 i32)
   local.get $0
@@ -7754,7 +7829,7 @@
   end
   i32.const 0
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#get (; 179 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#get (; 183 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   local.get $0
@@ -7771,8 +7846,8 @@
   local.get $3
   i32.eqz
   if
-   i32.const 1552
-   i32.const 1616
+   i32.const 1600
+   i32.const 1664
    i32.const 111
    i32.const 16
    call $~lib/@solo-io/proxy-runtime/runtime/abort_proc_exit
@@ -7782,7 +7857,7 @@
   i32.load offset=4
   call $~lib/rt/pure/__retain
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/getRootContext (; 180 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/getRootContext (; 184 ;) (param $0 i32) (result i32)
   (local $1 i32)
   global.get $~lib/@solo-io/proxy-runtime/runtime/context_map
   local.get $0
@@ -7802,11 +7877,11 @@
   end
   call $~lib/rt/pure/__retain
  )
- (func $~setArgumentsLength (; 181 ;) (param $0 i32)
+ (func $~setArgumentsLength (; 185 ;) (param $0 i32)
   local.get $0
   global.set $~argumentsLength
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_vm_start (; 182 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_vm_start (; 186 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   local.get $0
@@ -7829,7 +7904,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#has (; 183 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#has (; 187 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   local.get $1
@@ -7844,7 +7919,7 @@
   i32.const 0
   i32.ne
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/get_property (; 184 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/get_property (; 188 ;) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   local.get $0
@@ -7872,10 +7947,10 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/get_plugin_root_id (; 185 ;) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/get_plugin_root_id (; 189 ;) (result i32)
   (local $0 i32)
   (local $1 i32)
-  i32.const 1664
+  i32.const 1712
   call $~lib/@solo-io/proxy-runtime/runtime/get_property
   local.set $0
   local.get $0
@@ -7898,7 +7973,7 @@
   call $~lib/rt/pure/__release
   local.get $1
  )
- (func "$~lib/map/Map<~lib/string/String,() => ~lib/@solo-io/proxy-runtime/runtime/RootContext>#has" (; 186 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func "$~lib/map/Map<~lib/string/String,() => ~lib/@solo-io/proxy-runtime/runtime/RootContext>#has" (; 190 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   local.get $1
@@ -7926,7 +8001,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func "$~lib/map/Map<~lib/string/String,() => ~lib/@solo-io/proxy-runtime/runtime/RootContext>#get" (; 187 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func "$~lib/map/Map<~lib/string/String,() => ~lib/@solo-io/proxy-runtime/runtime/RootContext>#get" (; 191 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -7954,8 +8029,8 @@
   if
    local.get $1
    call $~lib/rt/pure/__release
-   i32.const 1552
-   i32.const 1616
+   i32.const 1600
+   i32.const 1664
    i32.const 111
    i32.const 16
    call $~lib/@solo-io/proxy-runtime/runtime/abort_proc_exit
@@ -7968,7 +8043,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#rehash (; 188 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#rehash (; 192 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -8125,7 +8200,7 @@
   local.get $5
   call $~lib/rt/pure/__release
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#set (; 189 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#set (; 193 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -8245,7 +8320,7 @@
   local.get $2
   call $~lib/rt/pure/__release
  )
- (func $~lib/string/String#concat (; 190 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/string/String#concat (; 194 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -8259,7 +8334,7 @@
   i32.const 0
   i32.eq
   if
-   i32.const 1776
+   i32.const 1824
    local.tee $2
    local.get $1
    local.tee $3
@@ -8321,7 +8396,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/string/String.__concat (; 191 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/string/String.__concat (; 195 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -8330,7 +8405,7 @@
   call $~lib/rt/pure/__retain
   local.set $1
   local.get $0
-  i32.const 1776
+  i32.const 1824
   local.get $0
   i32.const 0
   i32.ne
@@ -8344,7 +8419,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ensureRootContext (; 192 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ensureRootContext (; 196 ;) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -8384,7 +8459,7 @@
    local.get $4
    call $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#set
    global.get $~lib/@solo-io/proxy-runtime/runtime/LogLevelValues.warn
-   i32.const 1712
+   i32.const 1760
    local.get $1
    call $~lib/string/String.__concat
    local.tee $5
@@ -8401,7 +8476,7 @@
    return
   end
   global.get $~lib/@solo-io/proxy-runtime/runtime/LogLevelValues.warn
-  i32.const 1808
+  i32.const 1856
   local.get $1
   call $~lib/string/String.__concat
   local.tee $5
@@ -8424,7 +8499,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_start (; 193 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_start (; 197 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   local.get $0
@@ -8450,7 +8525,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_validate_configuration (; 194 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_validate_configuration (; 198 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   local.get $0
@@ -8473,7 +8548,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_configure (; 195 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_configure (; 199 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   local.get $0
@@ -8496,7 +8571,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_tick (; 196 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_tick (; 200 ;) (param $0 i32)
   (local $1 i32)
   local.get $0
   call $~lib/@solo-io/proxy-runtime/runtime/getRootContext
@@ -8510,7 +8585,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_queue_ready (; 197 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_queue_ready (; 201 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   local.get $0
   call $~lib/@solo-io/proxy-runtime/runtime/getRootContext
@@ -8525,7 +8600,7 @@
   local.get $2
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/ensureContext (; 198 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/ensureContext (; 202 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -8561,7 +8636,7 @@
   local.get $4
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_context_create (; 199 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_context_create (; 203 ;) (param $0 i32) (param $1 i32)
   local.get $1
   i32.const 0
   i32.ne
@@ -8575,12 +8650,12 @@
    call $~lib/rt/pure/__release
   end
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_create (; 200 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_create (; 204 ;) (param $0 i32) (param $1 i32)
   local.get $0
   local.get $1
   call $~lib/@solo-io/proxy-runtime/exports/proxy_on_context_create
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/getContext (; 201 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/getContext (; 205 ;) (param $0 i32) (result i32)
   (local $1 i32)
   global.get $~lib/@solo-io/proxy-runtime/runtime/context_map
   local.get $0
@@ -8600,7 +8675,7 @@
   end
   call $~lib/rt/pure/__retain
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_request_headers (; 202 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_request_headers (; 206 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   local.get $0
@@ -8618,7 +8693,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_request_body (; 203 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_request_body (; 207 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   (local $4 i32)
   local.get $0
@@ -8639,7 +8714,7 @@
   call $~lib/rt/pure/__release
   local.get $4
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_request_trailers (; 204 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_request_trailers (; 208 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   local.get $0
@@ -8657,7 +8732,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_request_metadata (; 205 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_request_metadata (; 209 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   local.get $0
@@ -8675,7 +8750,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_response_headers (; 206 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_response_headers (; 210 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   local.get $0
@@ -8693,7 +8768,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_response_body (; 207 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_response_body (; 211 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   (local $4 i32)
   local.get $0
@@ -8714,7 +8789,7 @@
   call $~lib/rt/pure/__release
   local.get $4
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_response_trailers (; 208 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_response_trailers (; 212 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   local.get $0
@@ -8732,7 +8807,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_response_metadata (; 209 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_response_metadata (; 213 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   local.get $0
@@ -8750,7 +8825,7 @@
   call $~lib/rt/pure/__release
   local.get $3
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/HttpCallback>#find (; 210 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/HttpCallback>#find (; 214 ;) (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
   (local $4 i32)
   local.get $0
@@ -8798,7 +8873,7 @@
   end
   i32.const 0
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/HttpCallback>#has (; 211 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/HttpCallback>#has (; 215 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   local.get $0
   local.get $1
@@ -8813,7 +8888,7 @@
   i32.const 0
   i32.ne
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/HttpCallback>#get (; 212 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/HttpCallback>#get (; 216 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   local.get $0
@@ -8830,8 +8905,8 @@
   local.get $3
   i32.eqz
   if
-   i32.const 1552
-   i32.const 1616
+   i32.const 1600
+   i32.const 1664
    i32.const 111
    i32.const 16
    call $~lib/@solo-io/proxy-runtime/runtime/abort_proc_exit
@@ -8841,7 +8916,7 @@
   i32.load offset=4
   call $~lib/rt/pure/__retain
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/HttpCallback>#rehash (; 213 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/HttpCallback>#rehash (; 217 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -8998,7 +9073,7 @@
   local.get $5
   call $~lib/rt/pure/__release
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/HttpCallback>#delete (; 214 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/HttpCallback>#delete (; 218 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -9073,7 +9148,7 @@
   end
   i32.const 1
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/HttpCallback#call (; 215 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/HttpCallback#call (; 219 ;) (param $0 i32)
   i32.const 1
   global.set $~argumentsLength
   local.get $0
@@ -9082,7 +9157,7 @@
   i32.load offset=4
   call_indirect (type $i32_=>_none)
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#onHttpCallResponse (; 216 ;) (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#onHttpCallResponse (; 220 ;) (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32)
   (local $5 i32)
   local.get $0
   i32.load offset=40
@@ -9105,7 +9180,7 @@
    call $~lib/rt/pure/__release
   end
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_http_call_response (; 217 ;) (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_http_call_response (; 221 ;) (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32)
   (local $5 i32)
   local.get $0
   call $~lib/@solo-io/proxy-runtime/runtime/getRootContext
@@ -9118,10 +9193,10 @@
   local.get $5
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#on_grpc_create_initial_metadata (; 218 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#on_grpc_create_initial_metadata (; 222 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   nop
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_grpc_create_initial_metadata (; 219 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_grpc_create_initial_metadata (; 223 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   local.get $0
   call $~lib/@solo-io/proxy-runtime/runtime/getRootContext
@@ -9132,10 +9207,10 @@
   local.get $3
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#on_grpc_receive_initial_metadata (; 220 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#on_grpc_receive_initial_metadata (; 224 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   nop
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_grpc_receive_initial_metadata (; 221 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_grpc_receive_initial_metadata (; 225 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   local.get $0
   call $~lib/@solo-io/proxy-runtime/runtime/getRootContext
@@ -9146,10 +9221,10 @@
   local.get $3
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#on_grpc_trailing_metadata (; 222 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#on_grpc_trailing_metadata (; 226 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   nop
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_grpc_trailing_metadata (; 223 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_grpc_trailing_metadata (; 227 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   local.get $0
   call $~lib/@solo-io/proxy-runtime/runtime/getRootContext
@@ -9160,10 +9235,10 @@
   local.get $3
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#on_grpc_receive (; 224 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#on_grpc_receive (; 228 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   nop
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_grpc_receive (; 225 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_grpc_receive (; 229 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   local.get $0
   call $~lib/@solo-io/proxy-runtime/runtime/getRootContext
@@ -9174,10 +9249,10 @@
   local.get $3
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#on_grpc_close (; 226 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/RootContext#on_grpc_close (; 230 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   nop
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_grpc_close (; 227 ;) (param $0 i32) (param $1 i32) (param $2 i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_grpc_close (; 231 ;) (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
   local.get $0
   call $~lib/@solo-io/proxy-runtime/runtime/getRootContext
@@ -9188,12 +9263,12 @@
   local.get $3
   call $~lib/rt/pure/__release
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/getBaseContext (; 228 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/getBaseContext (; 232 ;) (param $0 i32) (result i32)
   global.get $~lib/@solo-io/proxy-runtime/runtime/context_map
   local.get $0
   call $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#get
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_done (; 229 ;) (param $0 i32) (result i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_done (; 233 ;) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   local.get $0
@@ -9215,7 +9290,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_log (; 230 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_log (; 234 ;) (param $0 i32)
   (local $1 i32)
   local.get $0
   call $~lib/@solo-io/proxy-runtime/runtime/getContext
@@ -9229,7 +9304,7 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#delete (; 231 ;) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#delete (; 235 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -9304,13 +9379,13 @@
   end
   i32.const 1
  )
- (func $~lib/@solo-io/proxy-runtime/runtime/deleteContext (; 232 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/runtime/deleteContext (; 236 ;) (param $0 i32)
   global.get $~lib/@solo-io/proxy-runtime/runtime/context_map
   local.get $0
   call $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#delete
   drop
  )
- (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_delete (; 233 ;) (param $0 i32)
+ (func $~lib/@solo-io/proxy-runtime/exports/proxy_on_delete (; 237 ;) (param $0 i32)
   (local $1 i32)
   local.get $0
   call $~lib/@solo-io/proxy-runtime/runtime/getBaseContext
@@ -9326,11 +9401,11 @@
   local.get $1
   call $~lib/rt/pure/__release
  )
- (func $~start (; 234 ;)
+ (func $~start (; 238 ;)
   call $start:~lib/@solo-io/proxy-runtime/runtime
   call $start:assembly/index
  )
- (func $~lib/rt/pure/decrement (; 235 ;) (param $0 i32)
+ (func $~lib/rt/pure/decrement (; 239 ;) (param $0 i32)
   (local $1 i32)
   (local $2 i32)
   local.get $0
@@ -9405,10 +9480,10 @@
    i32.store offset=4
   end
  )
- (func $~lib/rt/pure/__collect (; 236 ;)
+ (func $~lib/rt/pure/__collect (; 240 ;)
   return
  )
- (func $~lib/rt/pure/__visit (; 237 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/rt/pure/__visit (; 241 ;) (param $0 i32) (param $1 i32)
   local.get $0
   global.get $~lib/heap/__heap_base
   i32.lt_u
@@ -9432,7 +9507,7 @@
   i32.sub
   call $~lib/rt/pure/decrement
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#__visit_impl (; 238 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/BaseContext>#__visit_impl (; 242 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -9488,7 +9563,7 @@
   local.get $1
   call $~lib/rt/pure/__visit
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/HttpCallback>#__visit_impl (; 239 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/HttpCallback>#__visit_impl (; 243 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -9544,7 +9619,7 @@
   local.get $1
   call $~lib/rt/pure/__visit
  )
- (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/GrpcCallback>#__visit_impl (; 240 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/map/Map<u32,~lib/@solo-io/proxy-runtime/runtime/GrpcCallback>#__visit_impl (; 244 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -9600,7 +9675,7 @@
   local.get $1
   call $~lib/rt/pure/__visit
  )
- (func "$~lib/map/Map<~lib/string/String,() => ~lib/@solo-io/proxy-runtime/runtime/RootContext>#__visit_impl" (; 241 ;) (param $0 i32) (param $1 i32)
+ (func "$~lib/map/Map<~lib/string/String,() => ~lib/@solo-io/proxy-runtime/runtime/RootContext>#__visit_impl" (; 245 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -9656,10 +9731,10 @@
   local.get $1
   call $~lib/rt/pure/__visit
  )
- (func $~lib/array/Array<u32>#__visit_impl (; 242 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/array/Array<u32>#__visit_impl (; 246 ;) (param $0 i32) (param $1 i32)
   nop
  )
- (func $~lib/rt/__visit_members (; 243 ;) (param $0 i32) (param $1 i32)
+ (func $~lib/rt/__visit_members (; 247 ;) (param $0 i32) (param $1 i32)
   (local $2 i32)
   block $block$12$break
    block $block$14$break
