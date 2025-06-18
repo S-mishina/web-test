@@ -27,7 +27,7 @@ class AddHeader extends Context {
     if (root_context.configuration == "") {
       // 特定のpathだったら
       if (stream_context.headers.response.get(":path") == "health/liveness") {
-        stream_context.headers.response.add("hello", "liveness!");
+        stream_context.headers.response.add("test", "liveness!");
         stream_context.headers.response.add("hello", "world!");
         return FilterHeadersStatusValues.Continue;
       } else {
