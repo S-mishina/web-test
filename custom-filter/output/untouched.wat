@@ -33,11 +33,11 @@
  (data (i32.const 1120) "\10\00\00\00\01\00\00\00\15\00\00\00\10\00\00\00\d0\02\00\00\d0\02\00\00\90\01\00\00d\00\00\00")
  (data (i32.const 1152) "\04\00\00\00\01\00\00\00\01\00\00\00\04\00\00\00:\00(\00")
  (data (i32.const 1184) "\00\00\00\00\01\00\00\00\01\00\00\00\00\00\00\00")
- (data (i32.const 1200) "\08\00\00\00\01\00\00\00\01\00\00\00\08\00\00\00t\00e\00s\00t\00")
- (data (i32.const 1232) "\n\00\00\00\01\00\00\00\01\00\00\00\n\00\00\00o\00k\00 \00i\00f\00")
- (data (i32.const 1264) "\n\00\00\00\01\00\00\00\01\00\00\00\n\00\00\00h\00e\00l\00l\00o\00")
- (data (i32.const 1296) "\0c\00\00\00\01\00\00\00\01\00\00\00\0c\00\00\00w\00o\00r\00l\00d\00!\00")
- (data (i32.const 1328) "\0c\00\00\00\01\00\00\00\01\00\00\00\0c\00\00\00n\00o\00t\00 \00i\00f\00")
+ (data (i32.const 1200) "\n\00\00\00\01\00\00\00\01\00\00\00\n\00\00\00h\00e\00l\00l\00o\00")
+ (data (i32.const 1232) "\0c\00\00\00\01\00\00\00\01\00\00\00\0c\00\00\00w\00o\00r\00l\00d\00!\00")
+ (data (i32.const 1264) "\08\00\00\00\01\00\00\00\01\00\00\00\08\00\00\00t\00e\00s\00t\00")
+ (data (i32.const 1296) "\06\00\00\00\01\00\00\00\01\00\00\00\06\00\00\00h\00i\00t\00")
+ (data (i32.const 1328) "\08\00\00\00\01\00\00\00\01\00\00\00\08\00\00\00m\00i\00s\00s\00")
  (data (i32.const 1360) "\14\00\00\00\01\00\00\00\01\00\00\00\14\00\00\00a\00d\00d\00_\00h\00e\00a\00d\00e\00r\00")
  (data (i32.const 1408) "$\00\00\00\01\00\00\00\01\00\00\00$\00\00\00K\00e\00y\00 \00d\00o\00e\00s\00 \00n\00o\00t\00 \00e\00x\00i\00s\00t\00")
  (data (i32.const 1472) "\16\00\00\00\01\00\00\00\01\00\00\00\16\00\00\00~\00l\00i\00b\00/\00m\00a\00p\00.\00t\00s\00")
@@ -6641,33 +6641,26 @@
    i32.const 1280
    i32.const 1312
    call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#add
-   global.get $~lib/@solo-io/proxy-runtime/runtime/FilterHeadersStatusValues.Continue
-   local.set $3
-   local.get $2
-   call $~lib/rt/pure/__release
-   local.get $3
-   return
   else
    global.get $~lib/@solo-io/proxy-runtime/runtime/stream_context
    i32.load
    i32.load offset=4
    i32.const 1216
-   i32.const 1344
+   local.get $2
+   i32.load offset=48
    call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#add
    global.get $~lib/@solo-io/proxy-runtime/runtime/stream_context
    i32.load
    i32.load offset=4
    i32.const 1280
-   i32.const 1312
+   i32.const 1344
    call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#add
-   global.get $~lib/@solo-io/proxy-runtime/runtime/FilterHeadersStatusValues.Continue
-   local.set $3
-   local.get $2
-   call $~lib/rt/pure/__release
-   local.get $3
-   return
   end
-  unreachable
+  global.get $~lib/@solo-io/proxy-runtime/runtime/FilterHeadersStatusValues.Continue
+  local.set $3
+  local.get $2
+  call $~lib/rt/pure/__release
+  local.get $3
  )
  (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|9 (; 149 ;) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)

@@ -30,11 +30,11 @@
  (data (i32.const 672) "\02\00\00\00\01\00\00\00\01\00\00\00\02\00\00\000")
  (data (i32.const 704) "\04\00\00\00\01\00\00\00\01\00\00\00\04\00\00\00:\00(")
  (data (i32.const 740) "\01\00\00\00\01")
- (data (i32.const 752) "\08\00\00\00\01\00\00\00\01\00\00\00\08\00\00\00t\00e\00s\00t")
- (data (i32.const 784) "\n\00\00\00\01\00\00\00\01\00\00\00\n\00\00\00o\00k\00 \00i\00f")
- (data (i32.const 816) "\n\00\00\00\01\00\00\00\01\00\00\00\n\00\00\00h\00e\00l\00l\00o")
- (data (i32.const 848) "\0c\00\00\00\01\00\00\00\01\00\00\00\0c\00\00\00w\00o\00r\00l\00d\00!")
- (data (i32.const 880) "\0c\00\00\00\01\00\00\00\01\00\00\00\0c\00\00\00n\00o\00t\00 \00i\00f")
+ (data (i32.const 752) "\n\00\00\00\01\00\00\00\01\00\00\00\n\00\00\00h\00e\00l\00l\00o")
+ (data (i32.const 784) "\0c\00\00\00\01\00\00\00\01\00\00\00\0c\00\00\00w\00o\00r\00l\00d\00!")
+ (data (i32.const 816) "\08\00\00\00\01\00\00\00\01\00\00\00\08\00\00\00t\00e\00s\00t")
+ (data (i32.const 848) "\06\00\00\00\01\00\00\00\01\00\00\00\06\00\00\00h\00i\00t")
+ (data (i32.const 880) "\08\00\00\00\01\00\00\00\01\00\00\00\08\00\00\00m\00i\00s\00s")
  (data (i32.const 912) "\14\00\00\00\01\00\00\00\01\00\00\00\14\00\00\00a\00d\00d\00_\00h\00e\00a\00d\00e\00r")
  (data (i32.const 960) "$\00\00\00\01\00\00\00\01\00\00\00$\00\00\00K\00e\00y\00 \00d\00o\00e\00s\00 \00n\00o\00t\00 \00e\00x\00i\00s\00t")
  (data (i32.const 1024) "\16\00\00\00\01\00\00\00\01\00\00\00\16\00\00\00~\00l\00i\00b\00/\00m\00a\00p\00.\00t\00s")
@@ -3540,6 +3540,7 @@
  (func $assembly/index/AddHeader#onResponseHeaders (; 84 ;) (param $0 i32) (result i32)
   local.get $0
   i32.load offset=68
+  local.tee $0
   i32.load offset=48
   i32.const 752
   call $~lib/string/String.__eq
@@ -3550,20 +3551,27 @@
    i32.const 768
    i32.const 800
    call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#add
+   global.get $~lib/@solo-io/proxy-runtime/runtime/stream_context
+   i32.load
+   i32.load offset=4
+   i32.const 832
+   i32.const 864
+   call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#add
   else
    global.get $~lib/@solo-io/proxy-runtime/runtime/stream_context
    i32.load
    i32.load offset=4
    i32.const 768
+   local.get $0
+   i32.load offset=48
+   call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#add
+   global.get $~lib/@solo-io/proxy-runtime/runtime/stream_context
+   i32.load
+   i32.load offset=4
+   i32.const 832
    i32.const 896
    call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#add
   end
-  global.get $~lib/@solo-io/proxy-runtime/runtime/stream_context
-  i32.load
-  i32.load offset=4
-  i32.const 832
-  i32.const 864
-  call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#add
   i32.const 0
  )
  (func $~lib/@solo-io/proxy-runtime/runtime/ContextHelper<assembly/index/AddHeader>#constructor~anonymous|9 (; 85 ;) (param $0 i32) (param $1 i32) (result i32)

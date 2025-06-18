@@ -25,14 +25,13 @@ class AddHeader extends Context {
   onResponseHeaders(a: u32): FilterHeadersStatusValues {
     const root_context = this.root_context;
     if (root_context.configuration == "") {
-        stream_context.headers.response.add("test", "ok if");
-        stream_context.headers.response.add("hello", "world!");
-        return FilterHeadersStatusValues.Continue;
-    }else {
-        stream_context.headers.response.add("test", "not if");
-        stream_context.headers.response.add("hello", "world!");
-        return FilterHeadersStatusValues.Continue;
+      stream_context.headers.response.add("hello", "world!");
+      stream_context.headers.response.add("test", "hit")
+    } else {
+      stream_context.headers.response.add("hello", root_context.configuration);
+      stream_context.headers.response.add("test", "miss");
     }
+    return FilterHeadersStatusValues.Continue;
   }
 }
 
