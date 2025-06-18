@@ -31,7 +31,10 @@ class AddHeader extends Context {
         stream_context.headers.response.add("hello", "world!");
         return FilterHeadersStatusValues.Continue;
       } else {
-        stream_context.headers.response.add("hello", root_context.configuration);
+              if (stream_context.headers.response.get(":path") == "/health/liveness") {
+                stream_context.headers.response.add("test", "liveness!");
+                stream_context.headers.response.add("hello", "world!");
+              }
         return FilterHeadersStatusValues.Continue;
       }
     }

@@ -6700,6 +6700,7 @@
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
+  (local $5 i32)
   local.get $0
   i32.load offset=68
   call $~lib/rt/pure/__retain
@@ -6742,17 +6743,34 @@
     global.get $~lib/@solo-io/proxy-runtime/runtime/stream_context
     i32.load
     i32.load offset=4
-    i32.const 1376
-    local.get $2
-    i32.load offset=48
-    call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#add
+    i32.const 1216
+    call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#get
+    local.tee $4
+    i32.const 1248
+    call $~lib/string/String.__eq
+    if
+     global.get $~lib/@solo-io/proxy-runtime/runtime/stream_context
+     i32.load
+     i32.load offset=4
+     i32.const 1296
+     i32.const 1328
+     call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#add
+     global.get $~lib/@solo-io/proxy-runtime/runtime/stream_context
+     i32.load
+     i32.load offset=4
+     i32.const 1376
+     i32.const 1408
+     call $~lib/@solo-io/proxy-runtime/runtime/HeaderStreamManipulator#add
+    end
     global.get $~lib/@solo-io/proxy-runtime/runtime/FilterHeadersStatusValues.Continue
-    local.set $4
+    local.set $5
+    local.get $4
+    call $~lib/rt/pure/__release
     local.get $2
     call $~lib/rt/pure/__release
     local.get $3
     call $~lib/rt/pure/__release
-    local.get $4
+    local.get $5
     return
    end
    unreachable
