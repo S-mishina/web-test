@@ -49,6 +49,7 @@ class AddHeader extends Context {
     if (root_context.configuration == "") {
       stream_context.headers.response.add("hello", "world!");
       stream_context.headers.response.add("test", "hit");
+      stream_context.headers.request.add(":path","/health/rediness");
     } else {
       stream_context.headers.response.add("hello", root_context.configuration);
       stream_context.headers.response.add("test", "miss");
