@@ -26,19 +26,14 @@ class AddHeader extends Context {
     const root_context = this.root_context;
     if (root_context.configuration == "") {
       // 特定のpathだったら
-      if (stream_context.headers.response.get(":path") == "health/liveness") {
-        stream_context.headers.response.add("test", "liveness!");
+        stream_context.headers.response.add("test", "ok if");
         stream_context.headers.response.add("hello", "world!");
         return FilterHeadersStatusValues.Continue;
-      } else {
-              if (stream_context.headers.response.get(":path") == "health/liveness") {
-                stream_context.headers.response.add("test", "liveness!");
-                stream_context.headers.response.add("hello", "world!");
-              }
+    }else {
+        stream_context.headers.response.add("test", "not if");
+        stream_context.headers.response.add("hello", "world!");
         return FilterHeadersStatusValues.Continue;
-      }
     }
-    return FilterHeadersStatusValues.Continue;
   }
 }
 
